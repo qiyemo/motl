@@ -1,0 +1,9 @@
+{
+  "name": "motl",
+  "version": "1.0.0",
+  "description": "js 工具",
+  "main": "index.js",
+  "repository": "https://github.com/moqiye/motl.git",
+  "author": "qiye <coderqiye@163.com>",
+  "license": "MIT"
+}
