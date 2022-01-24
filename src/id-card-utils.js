@@ -29,7 +29,7 @@ const check = (no) => {
 }
 
 // 生日
-const getBirthday = (no, skipCheck = false) => {
+export const getBirthday = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -46,7 +46,7 @@ const getBirthday = (no, skipCheck = false) => {
 }
 
 // 年
-const getYear = (no, skipCheck = false) => {
+export const getYear = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -57,7 +57,7 @@ const getYear = (no, skipCheck = false) => {
   return globalThis.parseInt(birthday.split('-')[0]);
 }
 // 月
-const getMonth = (no, skipCheck = false) => {
+export const getMonth = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -68,7 +68,7 @@ const getMonth = (no, skipCheck = false) => {
   return globalThis.parseInt(birthday.split('-')[1]);
 }
 // 日
-const getDate = (no, skipCheck = false) => {
+export const getDate = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -79,7 +79,7 @@ const getDate = (no, skipCheck = false) => {
   return globalThis.parseInt(birthday.split('-')[2]);
 }
 // 年龄
-const getAge = (no, skipCheck = false) => {
+export const getAge = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -101,7 +101,7 @@ const getAge = (no, skipCheck = false) => {
 }
 
 // 性别号
-const getSexNum = (no, skipCheck = false) => {
+export const getSexNum = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -119,7 +119,7 @@ const getSexNum = (no, skipCheck = false) => {
 }
 
 // 性别
-const getSex = (no, skipCheck = false) => {
+export const getSex = (no, skipCheck = false) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');
@@ -136,7 +136,7 @@ const getSex = (no, skipCheck = false) => {
 }
 
 // 获取身份证信息
-const getInfo = (no) => {
+export const getInfo = (no) => {
   if(skipCheck === false){
     if(!check(no)){
       throw new Error('参数错误');

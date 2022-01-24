@@ -1,9 +1,22 @@
 {
   "name": "motl",
-  "version": "1.0.0",
-  "description": "js 工具",
-  "main": "index.js",
+  "version": "1.0.1",
+  "description": "js 工具库",
+  "main": "dist/motl.es.js",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "typings": "dist/types/motl.d.ts",
   "repository": "https://github.com/moqiye/motl.git",
   "author": "qiye <coderqiye@163.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "build": "rollup -c"
+  },
+  "devDependencies": {
+    "rollup-plugin-clear": "^2.0.7",
+    "rollup-plugin-copy": "^3.4.0",
+    "rollup-plugin-terser": "^7.0.2"
+  }
 }

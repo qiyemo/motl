@@ -1,7 +1,12 @@
-const motool = {
-  hello: () => {
-    console.log(" hello motool !");
-  }
+
+
+import IDCardUtils from './src/id-card-utils';
+
+export {
+  IDCardUtils
 }
 
-export default motool;
+const motl = {
+  IDCardUtils
+}
+export default motl;
