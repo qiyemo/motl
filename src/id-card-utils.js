@@ -29,11 +29,9 @@ const check = (no) => {
 }
 
 // 生日
-export const getBirthday = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getBirthday = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
 
   // 6-13 年月日 
@@ -46,44 +44,36 @@ export const getBirthday = (no, skipCheck = false) => {
 }
 
 // 年
-export const getYear = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getYear = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
   
   const birthday = getBirthday(no);
   return globalThis.parseInt(birthday.split('-')[0]);
 }
 // 月
-export const getMonth = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getMonth = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
 
   const birthday = getBirthday(no);
   return globalThis.parseInt(birthday.split('-')[1]);
 }
 // 日
-export const getDate = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getDate = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
 
   const birthday = getBirthday(no);
   return globalThis.parseInt(birthday.split('-')[2]);
 }
 // 年龄
-export const getAge = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getAge = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
   const year = getYear(no);
   const month = getMonth(no);
@@ -101,13 +91,10 @@ export const getAge = (no, skipCheck = false) => {
 }
 
 // 性别号
-export const getSexNum = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getSexNum = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
-
   // 16 性别
   const sex = no.charAt(16);
   // 性别
@@ -119,11 +106,9 @@ export const getSexNum = (no, skipCheck = false) => {
 }
 
 // 性别
-export const getSex = (no, skipCheck = false) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+export const getSex = (no) => {
+  if(!check(no)){
+    throw new Error('参数错误');
   }
 
   const sexNum = getSexNum(no);
@@ -137,10 +122,8 @@ export const getSex = (no, skipCheck = false) => {
 
 // 获取身份证信息
 export const getInfo = (no) => {
-  if(skipCheck === false){
-    if(!check(no)){
-      throw new Error('参数错误');
-    }
+  if(!check(no)){
+    throw new Error('参数错误');
   }
 
   // 0-1 省份（或自治区、直辖市）
