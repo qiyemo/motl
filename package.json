@@ -12,14 +12,15 @@
   "author": "qiye <coderqiye@163.com>",
   "license": "MIT",
   "scripts": {
-    "build": "rollup -c"
+    "build": "rollup -c",
+    "test": "jest ./test"
   },
   "devDependencies": {
+    "jest": "^27.4.7",
     "rollup-plugin-clear": "^2.0.7",
     "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2"
-  },
-  "dependencies": {
-    "rollup": "^2.66.0"
-  }
+    "rollup-plugin-terser": "^7.0.2",
+    "rollup": "^2.66.0",
+    "@babel/plugin-transform-modules-commonjs": "^7.16.8"
+  } 
 }

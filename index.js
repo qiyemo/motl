@@ -1,12 +1,18 @@
 
 
-import IDCardUtils from './src/id-card-utils';
+import IDCardUtils from './src/idcard-utils';
+import ObjectUtils from './src/object-utils';
+import DateUtils from './src/date-utils'
 
 export {
-  IDCardUtils
+  IDCardUtils,
+  ObjectUtils,
+  DateUtils,
 }
 
 const motl = {
-  IDCardUtils
+  IDCardUtils,
+  DateUtils,
+  ObjectUtils,
 }
 export default motl;
