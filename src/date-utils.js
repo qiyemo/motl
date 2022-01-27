@@ -1,28 +1,55 @@
 class DateUtils {
 
-  // java、element  yyyy-MM-dd HH:mm:ss
-  // dayjs、moment YYYY-MM-DD HH:mm:ss
-  static format(date, opt){
+  /**
+   * 格式化日期，支持 java、element、dayjs、moment 年，月，日，时，分，秒 匹配格式
+   * java、element yyyy-MM-dd HH:mm:ss
+   * dayjs、moment YYYY-MM-DD HH:mm:ss
+   * 
+   * @param {*} date 能通过 new Date 转换的日期字符串 | Date 对象
+   * @param {*} formatStr 日期格式字符串
+   * @returns 格式化后的结果
+   */
+  static format(date, formatStr){
     if((typeof date) === 'string'){
       date = new Date(date);
     }
     if(!(date instanceof Date)){
       throw new Error('参数有误');
     }
-
-    const opts = {year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit'}
-    // ObjectUtils.copyValue(opts, opt);
-    return Intl.DateTimeFormat("zh-CN", opts).format(date);
     
+    const isoStr = date.toISOString();
+    const dateItems = isoStr.split('T');
+
+    const dayItems = dateItems[0].split('-');
+    const timeItems = dateItems[1].split('.')[0].split(':');
+
+    const regYear = /yyyy|YYYY/;
+    const regMonth = /MM/;
+    const regDay = /dd|DD/;
+    const regHour = /HH/;
+    const regMinute = /mm/;
+    const regSecond = /ss/;
+
+    return formatStr
+    .replace(regYear, dayItems[0])
+    .replace(regMonth, dayItems[1])
+    .replace(regDay, dayItems[2])
+    .replace(regHour, timeItems[0])
+    .replace(regMinute, timeItems[1])
+    .replace(regSecond, timeItems[2]);
   }
 
+  /**
+   * 获取中文的星期
+   * 
+   * @param {*} date 能通过 new Date 转换的日期字符串 | Date 对象
+   * @returns 类型的星期 string
+   */
   static cnWeek(date){
     
     if((typeof date) === 'string'){
       date = new Date(date);
     }
-    console.log('cnWeek date:', date);
-
     if(!(date instanceof Date)){
       throw new Error('参数有误');
     }
@@ -40,6 +67,12 @@ class DateUtils {
     
   }
 
+  /**
+   * 获取现实中真是的月份数（1-12）
+   * 
+   * @param {*} date 能通过 new Date 转换的日期字符串 | Date 对象
+   * @returns 月份数 number
+   */
   static realMonth(date){
     if((typeof date) === 'string'){
       date = new Date(date);
@@ -50,6 +83,13 @@ class DateUtils {
     return date.getMonth() + 1;
   }
 
+  /**
+   * 用现实中的月份数（1-12）设置 Date 月份
+   * 
+   * @param {*} date 能通过 new Date 转换的日期字符串 | Date 对象
+   * @param {*} realMonth 现实中的月份数（1-12）
+   * @returns 指定月份的新 Date 对象
+   */
   static withRealMonth(date, realMonth){
     if(realMonth < 1 || realMonth > 31){
       throw new Error('日期越界');
@@ -60,8 +100,10 @@ class DateUtils {
     if(!(date instanceof Date)){
       throw new Error('参数有误');
     }
-    date.setMonth(realMonth - 1);
-    return date;
+
+    let newDate = new Date(date.toISOString());
+    newDate.setMonth(realMonth - 1);
+    return newDate;
   }
 }
 
