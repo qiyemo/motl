@@ -162,3 +162,18 @@ IDCardUtils.getSexNum('610481199312303815'); // 1
 IDCardUtils.getSex('610481199312303815'); // 男
 
 ```
+
+## uuid-utils
+```js
+import { UUIDUtils } from 'motl';
+
+/**
+ * 生成一个36位（标准的UUID格式） uuid
+ */
+UUIDUtils.uuid();
+
+/**
+ * 生成一个 32 位 uuid
+ */
+UUIDUtils.uuid32();
+```
