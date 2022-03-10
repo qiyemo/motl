@@ -1,18 +1,15 @@
 {
   "name": "motl",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "js 工具库",
-  "main": "dist/motl.es.js",
+  "main": "index.js",
   "type": "module",
-  "files": [
-    "dist"
-  ],
-  "typings": "dist/types/motl.d.ts",
+  "typings": "motl.d.ts",
   "repository": "https://github.com/moqiye/motl.git",
   "author": "qiye <coderqiye@163.com>",
   "license": "MIT",
+  "files": ["index.js","motl.d.ts", "src"],
   "scripts": {
-    "build": "rollup -c",
     "test": "jest ./test"
   },
   "keywords": [
@@ -23,11 +20,6 @@
     "object utils"
   ],
   "devDependencies": {
-    "jest": "^27.4.7",
-    "rollup-plugin-clear": "^2.0.7",
-    "rollup-plugin-copy": "^3.4.0",
-    "rollup-plugin-terser": "^7.0.2",
-    "rollup": "^2.66.0",
-    "@babel/plugin-transform-modules-commonjs": "^7.16.8"
+    "jest": "^27.4.7"
   } 
 }

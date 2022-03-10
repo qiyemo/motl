@@ -1,4 +1,4 @@
-import { UUIDUtils } from '../dist/motl.es';
+import { UUIDUtils } from '../index';
 
 test("UUIDUtils.uuid()", () => {
   const uid = UUIDUtils.uuid();

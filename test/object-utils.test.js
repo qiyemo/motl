@@ -1,5 +1,5 @@
 
-import { ObjectUtils } from '../dist/motl.es';
+import { ObjectUtils } from '../index';
 
 test("ObjectUtils.deepCopy({age: 28, name: '张三'})", () => {
   const info = {age: 28, name: '张三'};
