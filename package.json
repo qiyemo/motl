@@ -1,14 +1,18 @@
 {
   "name": "motl",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "js 工具库",
   "main": "index.js",
   "type": "module",
   "typings": "motl.d.ts",
   "repository": "https://github.com/moqiye/motl.git",
-  "author": "qiye <coderqiye@163.com>",
+  "author": "qiye <qiye.mo@foxmail.com>",
   "license": "MIT",
-  "files": ["index.js","motl.d.ts", "src"],
+  "files": [
+    "index.js",
+    "motl.d.ts",
+    "src"
+  ],
   "scripts": {
     "test": "jest ./test"
   },
@@ -17,9 +21,12 @@
     "js 工具库",
     "date utils",
     "idcard utils",
-    "object utils"
+    "object utils",
+    "uuid utils"
   ],
   "devDependencies": {
+    "@babel/core": "^7.0.0-0",
+    "@babel/plugin-transform-modules-commonjs": "^7.18.6",
     "jest": "^27.4.7"
-  } 
+  }
 }
