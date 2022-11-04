@@ -1,28 +1,7 @@
 
-
-// class IDCardInfo {
-//   // 生日 string
-//   birthday;
-//   // 年份 number
-//   year;
-//   // 月份 number
-//   month;
-//   // 月中的日 number
-//   date;
-//   // 年龄 number
-//   age;
-//   // 性别
-//   sex;
-//   // 性别号:  1：男，0：女
-//   sexNum;
-// }
-
-// class IDCardUtils {
-
+const regIdCard = /(^\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$)|(^\d{6}(18|19|20)\d{2}(0\d|10|11|12)([0-2]\d|30|31)\d{3}(\d|X|x)$)/;
  
-// }
-
- /**
+/**
    * 检查身份证格式是否合法
    * @param {*} no string 身份证号
    * @returns boolean 
@@ -31,10 +10,7 @@
     if(!no){
       return false;
     }
-    if(no.length !== 18){
-      return false;
-    }
-    return true;
+    return no.test(regIdCard);
   }
 
   /**
