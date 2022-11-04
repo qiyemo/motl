@@ -1,30 +1,33 @@
 
 
-class IDCardInfo {
-  // 生日 string
-  birthday;
-  // 年份 number
-  year;
-  // 月份 number
-  month;
-  // 月中的日 number
-  date;
-  // 年龄 number
-  age;
-  // 性别
-  sex;
-  // 性别号:  1：男，0：女
-  sexNum;
-}
+// class IDCardInfo {
+//   // 生日 string
+//   birthday;
+//   // 年份 number
+//   year;
+//   // 月份 number
+//   month;
+//   // 月中的日 number
+//   date;
+//   // 年龄 number
+//   age;
+//   // 性别
+//   sex;
+//   // 性别号:  1：男，0：女
+//   sexNum;
+// }
 
-class IDCardUtils {
+// class IDCardUtils {
 
-  /**
+ 
+// }
+
+ /**
    * 检查身份证格式是否合法
    * @param {*} no string 身份证号
    * @returns boolean 
    */
-  static check(no){
+  const check = (no) => {
     if(!no){
       return false;
     }
@@ -40,8 +43,8 @@ class IDCardUtils {
  * @param {*} no 身份证号
  * @returns 生日 YYYY-MM-DD
  */
-  static getBirthday(no){
-    if(!IDCardUtils.check(no)){
+  export const  getBirthday = (no) => {
+    if(!check(no)){
       throw new Error('参数错误');
     }
   
@@ -60,8 +63,8 @@ class IDCardUtils {
    * @param {*} no 身份证号
    * @returns number 出生年
    */
-  static getYear(no){
-    if(!IDCardUtils.check(no)){
+  export const getYear = (no) => {
+    if(!check(no)){
       throw new Error('参数错误');
     }
     
@@ -75,8 +78,8 @@ class IDCardUtils {
  * @param {*} no 身份证号
  * @returns number 出生月(1~12)
  */
- static getMonth(no){
-    if(!IDCardUtils.check(no)){
+ export const getMonth = (no) => {
+    if(!check(no)){
       throw new Error('参数错误');
     }
 
@@ -91,8 +94,8 @@ class IDCardUtils {
  * @param {*} no 身份证号
  * @returns number 出生日（1~31）
  */
-  static getDate(no){
-    if(!IDCardUtils.check(no)){
+  export const getDate = (no) => {
+    if(!check(no)){
       throw new Error('参数错误');
     }
     const birthday = IDCardUtils.getBirthday(no);
@@ -105,8 +108,8 @@ class IDCardUtils {
  * @param {*} no string 身份证号
  * @returns number 年龄  
  */
-  static getAge(no){
-    if(!IDCardUtils.check(no)){
+  export const getAge = (no) =>{
+    if(!check(no)){
       throw new Error('参数错误');
     }
     const year = IDCardUtils.getYear(no);
@@ -130,8 +133,8 @@ class IDCardUtils {
  * @param {*} no string 身份证号
  * @returns number 性别号
  */
-  static getSexNum(no){
-    if(!IDCardUtils.check(no)){
+  export const getSexNum = (no) => {
+    if(!check(no)){
       throw new Error('参数错误');
     }
     // 16 性别
@@ -152,7 +155,7 @@ class IDCardUtils {
    * @param {*} no string 身份证号
    * @returns '男' | '女' 性别
    */
-  static getSex(no){
+  export const  getSex = (no) => {
     const num = IDCardUtils.getSexNum(no);
     if(num === 1){
       return '男';
@@ -175,8 +178,8 @@ class IDCardUtils {
   *  sexNum: number, // 1 男，0 女
   * }
   */
-  static getInfo(no){
-    if(!IDCardUtils.check(no)){
+  export const getInfo = (no) => {
+    if(!check(no)){
       throw new Error('参数错误');
     }
   
@@ -191,7 +194,7 @@ class IDCardUtils {
     // 17 校验码
     const checkCode = no.charAt(17);
   
-    const info = new IDCardInfo();
+    const info = {};
     // 生日
     info.birthday = IDCardUtils.getBirthday(no);
     info.year = IDCardUtils.getYear(no);
@@ -204,6 +207,16 @@ class IDCardUtils {
     info.sexNum = IDCardUtils.getSexNum(no);
     return info;
   }
+
+const IDCardUtils = {
+  getBirthday,
+  getYear,
+  getMonth,
+  getDate,
+  getAge,
+  getSexNum,
+  getSex,
+  getInfo,
 }
 
 export default IDCardUtils;

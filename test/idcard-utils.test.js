@@ -1,5 +1,5 @@
 
-import { IDCardUtils } from "../index";
+import { IDCardUtils } from "../dist/motl.es";
 
 test("IDCardUtils.getBirthday('610481199312303815')", () => {
   expect(IDCardUtils.getBirthday('610481199312303815')).toBe('1993-12-30');

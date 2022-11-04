@@ -1,4 +1,4 @@
-import { DateUtils } from "../index";
+import { DateUtils } from "../dist/motl.es";
 
 test("DateUtils.format('2022-01-26')", () => {
   expect(DateUtils.format('2022-01-26', 'yyyy-MM-dd HH:mm:ss'))
