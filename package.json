@@ -1,6 +1,6 @@
 {
   "name": "motl",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "description": "js 工具库",
   "main": "dist/motl.es.js",
   "type": "module",
@@ -16,7 +16,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/WFLNANA/wfl-utils/tree/main"
+    "url": "https://github.com/moqiye/motl.git"
   },
   "keywords": [
     "js 工具",
