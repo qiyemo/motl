@@ -177,3 +177,59 @@ UUIDUtils.uuid();
  */
 UUIDUtils.uuid32();
 ```
+
+## tree-utils
+```js
+import {TreeUtils} from 'motl';
+
+/**
+ * 将数组转换为树形结构
+ * @param {*} list 源数组
+ * @param {*} topLevelParentId 根父 id
+ * @param {*} options {idField: 唯一标识字段名（默认：'id'）, parentIdField: 父id字段名（默认：'parentId'）, childrenField: 子字段名（默认：'children'）}
+ * @returns 树形数组
+ */
+const list = [
+  {id: '1', name: '1', parentId: '0'},
+  {id: '2', name: '2', parentId: '0'},
+  {id: '1-1', name: '1-1', parentId: '1'},
+  {id: '1-2', name: '1-2', parentId: '1'},
+  {id: '1-1-1', name: '1-1-1', parentId: '1-1'},
+];
+const tree = TreeUtils.toTree(list, '0');
+
+/**
+ * 将树转换为数组
+ * @param {*} tree 源树
+ * @param {*} options {childrenField: 子字段名（默认：'children'）}
+ * @returns 数组
+ */
+const tree = [
+  {id: '1', name: '1', parentId: '0', children: [
+    {id: '1-1', name: '1-1', parentId: '1', children: [
+      {id: '1-1-1', name: '1-1-1', parentId: '1-1'},
+    ]},
+    {id: '1-2', name: '1-2', parentId: '1'},
+  ]},
+  {id: '2', name: '2', parentId: '0'},
+];
+const list = TreeUtils.toList(tree);
+```
+## file-utils
+```js
+import { FileUtils } from 'motl';
+
+/**
+ * 是图片
+ * @param name 
+ * @returns 
+ */
+FileUtils.isImg('123.png');
+
+/**
+ * 是 PDF
+ * @param name 
+ * @returns 
+ */
+FileUtils.isPdf('123.pdf');
+````

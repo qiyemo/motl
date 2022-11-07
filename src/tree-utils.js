@@ -19,7 +19,11 @@ const setChildren = (target, list, idField = 'id',parentIdField = 'parentId', ch
 }
 
 /**
- *  将数组转换为树形结构
+ * 将数组转换为树形结构
+ * @param {*} list 源数组
+ * @param {*} topLevelParentId 根父 id
+ * @param {*} options {idField: 唯一标识字段名（默认：'id'）, parentIdField: 父id字段名（默认：'parentId'）, childrenField: 子字段名（默认：'children'）}
+ * @returns 树形数组
  */
  export const toTree = (list, topLevelParentId = null , options = {
   idField: 'id',
@@ -38,8 +42,9 @@ const setChildren = (target, list, idField = 'id',parentIdField = 'parentId', ch
 
 /**
  * 将树转换为数组
- * @param tree 
- * @returns 
+ * @param {*} tree 源树
+ * @param {*} options {childrenField: 子字段名（默认：'children'）}
+ * @returns 数组
  */
 export const toList = (tree, options = {childrenField: 'children'} ,retArr = []) => {
 
