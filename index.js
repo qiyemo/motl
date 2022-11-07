@@ -5,6 +5,7 @@ import ObjectUtils from './src/object-utils';
 import DateUtils from './src/date-utils';
 import UUIDUtils from './src/uuid-utils';
 import FileUtils from './src/file-utils';
+import TreeUtils from './src/tree-utils';
 
 
 export {
@@ -12,7 +13,8 @@ export {
   ObjectUtils,
   DateUtils,
   UUIDUtils,
-  FileUtils
+  FileUtils,
+  TreeUtils
 }
 
 const motl = {
@@ -20,6 +22,7 @@ const motl = {
   DateUtils,
   ObjectUtils,
   UUIDUtils,
-  FileUtils
+  FileUtils,
+  TreeUtils
 }
 export default motl;

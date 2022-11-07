@@ -45,4 +45,9 @@ declare module 'motl' {
     function isImg(name: string): boolean;
     function isPdf(name: string): boolean;
   }
+
+  export namespace TreeUtils {
+    function toTree(list: any[], topLevelParentId: any): any[];
+    function toList(tree: any[]): any[];
+  }
 }
