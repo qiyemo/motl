@@ -10,7 +10,7 @@ const regIdCard = /(^\d{8}(0\d|10|11|12)([0-2]\d|30|31)\d{3}$)|(^\d{6}(18|19|20)
     if(!no){
       return false;
     }
-    return no.test(regIdCard);
+    return regIdCard.test(no);
   }
 
   /**

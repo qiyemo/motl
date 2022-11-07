@@ -40,4 +40,9 @@ declare module 'motl' {
     function uuid(): string;
     function uuid32(): string;
   }
+
+  export namespace FileUtils {
+    function isImg(name: string): boolean;
+    function isPdf(name: string): boolean;
+  }
 }

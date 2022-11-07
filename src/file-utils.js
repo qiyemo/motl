@@ -35,3 +35,10 @@ const is = (name, suffixs) => {
   const pdfSuffixs = ['.pdf'];
   return is(name, pdfSuffixs);
 }
+
+const FileUtils = {
+  isImg,
+  isPdf
+}
+
+export default FileUtils;
