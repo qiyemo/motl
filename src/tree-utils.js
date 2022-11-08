@@ -59,9 +59,49 @@ export const toList = (tree, options = {childrenField: 'children'} ,retArr = [])
   return retArr;
 }
 
+
+/**
+ * 根据唯一标识获取树上的节点
+ * @param {*} id 唯一标识
+ * @param {*} tree 树形数据
+ * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
+ * @returns 查询到的节点或 null
+ */
+export const findNode = (id, tree, options = {idFieldName: 'id', childrenFieldName: 'children'}) => {
+  if(!id){
+    throw new Error('id 参数错误');
+  }
+  if(!tree || !tree.length){
+    throw new Error('tree 参数错误');
+  }
+
+  const { idFieldName = 'id', childrenFieldName = 'children'} = options;
+
+  let target = null;
+  for (let node of tree) {
+   
+    if (node[idFieldName] === id) {
+      target = node;
+    }
+  }
+  if (target) {
+    return target;
+  }
+  for (let node of tree) {
+    if (node.children?.length) {
+      target = findNode(id, node[childrenFieldName]);
+      if (target) {
+        return target;
+      }
+    }
+  }
+  return target;
+}
+
 const TreeUtils = {
   toTree,
-  toList
+  toList,
+  findNode
 }
 
 export default TreeUtils;

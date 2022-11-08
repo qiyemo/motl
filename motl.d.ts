@@ -49,5 +49,14 @@ declare module 'motl' {
   export namespace TreeUtils {
     function toTree(list: any[], topLevelParentId: any): any[];
     function toList(tree: any[]): any[];
+
+    /**
+     * 根据唯一标识获取树上的节点
+     * @param {*} id 唯一标识
+     * @param {*} tree 树形数据
+     * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
+     * @returns 查询到的节点或 null
+     */
+    function findNode(id: string, tree: any[], options: {idFieldName: string; childrenFieldName: string;}): any;
   }
 }

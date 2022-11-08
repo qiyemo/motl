@@ -214,6 +214,24 @@ const tree = [
   {id: '2', name: '2', parentId: '0'},
 ];
 const list = TreeUtils.toList(tree);
+
+/**
+ * 
+ * @param {*} id 唯一标识
+ * @param {*} tree 树形数据
+ * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
+ * @returns 查询到的节点或 null
+ */
+const tree = [
+  {id: '1', name: '1', parentId: '0', children: [
+    {id: '1-1', name: '1-1', parentId: '1', children: [
+      {id: '1-1-1', name: '1-1-1', parentId: '1-1'},
+    ]},
+    {id: '1-2', name: '1-2', parentId: '1'},
+  ]},
+  {id: '2', name: '2', parentId: '0'},
+];
+const node = TreeUtils.findNode('1-1', tree);
 ```
 ## file-utils
 ```js
