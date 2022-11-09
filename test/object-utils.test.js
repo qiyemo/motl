@@ -43,6 +43,7 @@ test("isObject(value)", () => {
 
 test("ObjectUtils.isEmpty({})", () => {
   expect(ObjectUtils.isEmpty({})).toBe(true);
+  expect(ObjectUtils.isEmpty(null)).toBe(false);
   expect(ObjectUtils.isEmpty({age: 28})).toBe(false);
 })
 

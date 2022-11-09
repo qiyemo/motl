@@ -22,7 +22,6 @@ const is = (name, suffixs) => {
  export const isImg = (name) => {
   const imgSuffixs = ['.jpg','.jpeg','.png','.gif'];
   const ret = is(name, imgSuffixs);
-  console.log('ret ', ret);
   return ret;
 }
 

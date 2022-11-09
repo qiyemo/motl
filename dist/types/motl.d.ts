@@ -59,4 +59,19 @@ declare module 'motl' {
      */
     function findNode(id: string, tree: any[], options: {idFieldName: string; childrenFieldName: string;}): any;
   }
+
+  export namespace IsUtils {
+    function isArray(obj: any): boolean;
+    function isObject(obj: any): boolean;
+    function isString(obj: any): boolean;
+    function isNumber(obj: any): boolean;
+    function isRegExp(obj: any): boolean;
+    function isFile(obj: any): boolean;
+    function isBlob(obj: any): boolean;
+    function isUndefined(obj: any): boolean;
+    function isNull(obj: any): boolean;
+    function isFunction(obj: any): boolean;
+    function isEmptyObject(obj: any): boolean;
+    function isExist(obj: any): boolean;
+  }
 }

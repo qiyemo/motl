@@ -1,4 +1,6 @@
 
+const opt = Object.prototype.toString;
+
 /**
    * 深拷贝
    * 
@@ -25,14 +27,17 @@ export const copyValue = (tar, src) => {
   });
 }
 
+
+// export const isObject = (value) => {
+//   return value !== null && (typeof value === 'object' || typeof value === 'function');
+// }
 /**
  * 判断参数是否为一个对象
  * @param {*} value 
  * @returns 布尔值
  */
 export const isObject = (value) => {
-  
-  return value !== null && (typeof value === 'object' || typeof value === 'function');
+  return opt.call(value) === '[object Object]';
 }
 
 /**
@@ -41,13 +46,7 @@ export const isObject = (value) => {
  * @returns 布尔值
  */
 export const isEmpty = (obj) => {
-  if(!ObjectUtils.isObject(obj)){
-    throw new Error('参数异常');
-  }
-  if(Object.getOwnPropertyNames(obj).length === 0){
-    return true;
-  }
-  return false;
+  return isObject(obj) && Object.keys(obj).length === 0;
 }
 
 const ObjectUtils = {

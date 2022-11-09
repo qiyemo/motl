@@ -250,4 +250,26 @@ FileUtils.isImg('123.png');
  * @returns 
  */
 FileUtils.isPdf('123.pdf');
-````
+```
+
+## is-utils
+```js
+/*
+function isArray(obj: any): boolean;
+function isObject(obj: any): boolean;
+function isString(obj: any): boolean;
+function isNumber(obj: any): boolean;
+function isRegExp(obj: any): boolean;
+function isFile(obj: any): boolean;
+function isBlob(obj: any): boolean;
+function isUndefined(obj: any): boolean;
+function isNull(obj: any): boolean;
+function isFunction(obj: any): boolean;
+function isEmptyObject(obj: any): boolean;
+function isExist(obj: any): boolean;
+*/
+
+import { IsUtils } from "motl";
+
+IsUtils.isArray([]); // true
+```

@@ -7,7 +7,6 @@ test("UUIDUtils.uuid()", () => {
 
 test("UUIDUtils.uuid32()", () => {
   const uid = UUIDUtils.uuid32();
-  console.log('UUIDUtils.uuid32() ', uid);
   expect(uid.length).toBe(32);
 });
 
