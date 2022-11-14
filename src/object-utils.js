@@ -27,10 +27,6 @@ export const copyValue = (tar, src) => {
   });
 }
 
-
-// export const isObject = (value) => {
-//   return value !== null && (typeof value === 'object' || typeof value === 'function');
-// }
 /**
  * 判断参数是否为一个对象
  * @param {*} value 
