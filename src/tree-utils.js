@@ -88,7 +88,7 @@ export const findNode = (id, tree, options = {idFieldName: 'id', childrenFieldNa
     return target;
   }
   for (let node of tree) {
-    if (node.children?.length) {
+    if (node.children  && node.children.length) {
       target = findNode(id, node[childrenFieldName]);
       if (target) {
         return target;

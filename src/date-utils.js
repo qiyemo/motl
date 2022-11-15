@@ -14,15 +14,11 @@
    * @returns 格式化后的结果
    */
   export const format = (date, formatStr = DEFAULT_FOMART) => {
-
-    
-    console.log('date ', date);
     let d = new Date(date);
     
     if(typeof date === 'string' && date.length === 'YYYY-MM-DD'.length){
       d.setHours(0,0,0,0);
     }
-    console.log('d ', d);
     if(!(d instanceof Date)){
       throw new Error('参数有误');
     }
@@ -63,14 +59,14 @@
     if (day < 10) day = '0' + day;
     let hour = d.getHours();//小时
 
-    console.log('hour ', hour);
+    
     if (hour < 10) hour = '0' + hour;
     let minute = d.getMinutes();//分钟
     if (minute < 10) minute = '0' + minute;
     let second = d.getSeconds();//秒
     if (second < 10) second = '0' + second;
     const datetimeStr = year + '-' + month + '-' + day + ' ' + hour + ':' + minute + ':' + second;
-    console.log('datetimeStr ', datetimeStr);
+    
     const dateItems = datetimeStr.split(' ');
     const dayItems = dateItems[0].split('-');
     const timeItems = dateItems[1].split('.')[0].split(':');
