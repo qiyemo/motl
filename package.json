@@ -1,6 +1,6 @@
 {
   "name": "motl",
-  "version": "1.0.22",
+  "version": "1.0.23",
   "description": "js 工具库",
   "main": "dist/motl.es.js",
   "type": "module",
@@ -32,7 +32,7 @@
   ],
   "browserslist": [
     "> 1%",
-    "last 2 versions",
+    "since 2018",
     "not dead"
   ],
   "engines": {
