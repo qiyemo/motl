@@ -45,11 +45,39 @@ export const isEmpty = (obj) => {
   return isObject(obj) && Object.keys(obj).length === 0;
 }
 
+/**
+ * 将空字符串属性值设置为 null
+ * 后端 定义的参数 String 默认是 null，前端定义的对象 string 默认是 ''，
+ * 给后端传值的时候，需要把 '' 转换为 null
+ * 
+ * @param {} obj 对象
+ * @returns 若传入的参数是对象，则返回转换后的新对象；若传入的参数不是对象，则返回原参数。
+ * 
+ */
+export const emptyStrToNull = (obj) => {
+
+  if(!isObject(obj)){
+    return obj;
+  }
+
+  const param = JSON.parse(JSON.stringify(obj));
+  if(typeof param === 'object'){
+    for(let key of Object.keys(param)){
+      if(typeof param[key] === 'string' && param[key] === ''){
+        param[key] = null;
+      }
+    }
+    
+  }
+  return param;
+}
+
 const ObjectUtils = {
   deepCopy,
   copyValue,
   isObject,
-  isEmpty
+  isEmpty,
+  emptyStrToNull
 }
 
 export default ObjectUtils;

@@ -27,6 +27,10 @@ declare module 'motl' {
     function copyValue(tar: any, src: any): void;
     function isObject(value: any): boolean;
     function isEmpty(obj: any): boolean;
+    /** 将空字符串属性值设置为 null */
+    function emptyStrToNull(obj: any): any;
+
+
   }
 
   export namespace DateUtils {

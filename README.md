@@ -17,7 +17,7 @@ import { ObjectUtils } from 'motl';
  * @param {*} o 
  * @returns 新对象
  */
-ObjectUtils.deepCopy(info
+ObjectUtils.deepCopy(info)
 
 /**
  * 把 src 属性的值赋给 tar 的同名属性
@@ -25,23 +25,43 @@ ObjectUtils.deepCopy(info
  * @param {*} tar 目标对象
  * @param {*} src 源对象
  */
-ObjectUtils.copyValue(tar, src
+ObjectUtils.copyValue(tar, src)
 
 /**
  * 判断参数是否为一个对象
  * @param {*} value 
  * @returns 布尔值
  */
-ObjectUtils.isObject({} // true
-ObjectUtils.isObject('' // false
+ObjectUtils.isObject({}) // true
+ObjectUtils.isObject('') // false
 
 /**
  * 判断对象是否为空对象，若传入非对象参数，抛异常
  * @param {} obj 
  * @returns 布尔值
  */
-ObjectUtils.isEmpty({} // true
-ObjectUtils.isEmpty({age: 18} // false 
+ObjectUtils.isEmpty({}) // true
+ObjectUtils.isEmpty({age: 18}) // false 
+
+
+/**
+ * 将空字符串属性值设置为 null
+ * 后端 定义的参数 String 默认是 null，前端定义的对象 string 默认是 ''，
+ * 给后端传值的时候，需要把 '' 转换为 null
+ * 
+ * @param {} obj 对象
+ * @returns 若传入的参数是对象，则返回转换后的新对象；若传入的参数不是对象，则返回原参数。
+ * 
+ */
+const tar = {
+  name: '',
+  age: 28
+}
+const ret = {
+  name: null,
+  age: 28
+}
+JSON.stringify(ObjectUtils.emptyStrToNull(tar)) === JSON.stringify(ret);
 ```
 
 ### date-utils
@@ -57,7 +77,7 @@ import {DateUtils} from 'motl';
  * @param {*} formatStr 日期格式字符串（默认：'YYYY-MM-DD HH:mm:ss'） 'yyyy-MM-dd HH:mm:ss' | 'YYYY-MM-DD HH:mm:ss' | 'year' | 'month' | 'day' | 'hour' | 'minute' | 'second'
  * @returns 格式化后的结果
  */
-  DateUtils.format('2022-01-26', 'YYYY年MM月DD日 HH时mm分ss秒' // 2022年01月26日 00时00分00秒
+  DateUtils.format('2022-01-26', 'YYYY年MM月DD日 HH时mm分ss秒') // 2022年01月26日 00时00分00秒
   DateUtils.format('2022-01-26 23:59:59', 'year')     // '2022'
   DateUtils.format('2022-01-26 23:59:59', 'month')  // '2022-01'
   DateUtils.format('2022-01-26 23:59:59', 'day')    // '2022-01-26'
@@ -79,7 +99,7 @@ DateUtils.cnWeek('2022-01-26') // 三
  * @param {*} date 能通过 new Date 转换的日期字符串 | Date 对象
  * @returns 月份数 number
  */
-DateUtils.realMonth('2022-01-26' // 1
+DateUtils.realMonth('2022-01-26') // 1
 
 /**
  * 用现实中的月份数（1-12）设置 Date 月份
@@ -88,7 +108,7 @@ DateUtils.realMonth('2022-01-26' // 1
  * @param {*} realMonth 现实中的月份数（1-12）
  * @returns 指定月份的新 Date 对象
  */
-const date = DateUtils.withRealMonth('2022-01-26', 1 // date.getMonth() === 1
+const date = DateUtils.withRealMonth('2022-01-26', 1) // date.getMonth() === 1
 ```
 
 ### idcard-utils
@@ -109,7 +129,7 @@ import { IDCardUtils } from "motl";
  *  sexNum: number, // 1 男，0 女
  * }
  */
-IDCardUtils.getInfo('610481199312303815'
+IDCardUtils.getInfo('610481199312303815')
 
 /**
  * 获取生日
@@ -117,7 +137,7 @@ IDCardUtils.getInfo('610481199312303815'
  * @param {*} no 身份证号
  * @returns 生日
  */
-IDCardUtils.getBirthday('610481199312303815' // 1993-12-30
+IDCardUtils.getBirthday('610481199312303815') // 1993-12-30
 
 /**
  * 获取出生年
@@ -125,7 +145,7 @@ IDCardUtils.getBirthday('610481199312303815' // 1993-12-30
  * @param {*} no 身份证号
  * @returns 出生年
  */
-IDCardUtils.getYear('610481199312303815' // 1993
+IDCardUtils.getYear('610481199312303815') // 1993
 
 /**
  * 获取出生月
@@ -133,7 +153,7 @@ IDCardUtils.getYear('610481199312303815' // 1993
  * @param {*} no 身份证号
  * @returns 出生月
  */
-IDCardUtils.getMonth('610481199312303815' // 12
+IDCardUtils.getMonth('610481199312303815') // 12
 
 /**
  * 获取出生日
@@ -141,7 +161,7 @@ IDCardUtils.getMonth('610481199312303815' // 12
  * @param {*} no 身份证号
  * @returns 出生日
  */
-IDCardUtils.getDate('610481199312303815' // 30
+IDCardUtils.getDate('610481199312303815') // 30
 
 /**
  * 获取年龄
@@ -149,7 +169,7 @@ IDCardUtils.getDate('610481199312303815' // 30
  * @param {*} no 身份证号
  * @returns 年龄
  */
-IDCardUtils.getAge('610481199312303815' // 28
+IDCardUtils.getAge('610481199312303815') // 28
 
 /**
  * 获取性别号 1 男，0 女
@@ -157,7 +177,7 @@ IDCardUtils.getAge('610481199312303815' // 28
  * @param {*} no 身份证号
  * @returns 性别号
  */
-IDCardUtils.getSexNum('610481199312303815' // 1
+IDCardUtils.getSexNum('610481199312303815') // 1
 
 /**
  * 获取性别
@@ -165,7 +185,7 @@ IDCardUtils.getSexNum('610481199312303815' // 1
  * @param {*} no 身份证号
  * @returns 性别
  */
-IDCardUtils.getSex('610481199312303815' // 男
+IDCardUtils.getSex('610481199312303815') // 男
 
 ```
 
@@ -176,12 +196,12 @@ import { UUIDUtils } from 'motl';
 /**
  * 生成一个36位（标准的UUID格式） uuid
  */
-UUIDUtils.uuid(
+UUIDUtils.uuid();
 
 /**
  * 生成一个 32 位 uuid
  */
-UUIDUtils.uuid32(
+UUIDUtils.uuid32();
 ```
 
 ## tree-utils
@@ -202,7 +222,7 @@ const list = [
   {id: '1-2', name: '1-2', parentId: '1'},
   {id: '1-1-1', name: '1-1-1', parentId: '1-1'},
 ];
-const tree = TreeUtils.toTree(list, '0'
+const tree = TreeUtils.toTree(list, '0');
 
 /**
  * 将树转换为数组
@@ -219,7 +239,7 @@ const tree = [
   ]},
   {id: '2', name: '2', parentId: '0'},
 ];
-const list = TreeUtils.toList(tree
+const list = TreeUtils.toList(tree);
 
 /**
  * 
@@ -237,7 +257,7 @@ const tree = [
   ]},
   {id: '2', name: '2', parentId: '0'},
 ];
-const node = TreeUtils.findNode('1-1', tree
+const node = TreeUtils.findNode('1-1', tree);
 ```
 ## file-utils
 ```js
@@ -248,14 +268,14 @@ import { FileUtils } from 'motl';
  * @param name 
  * @returns 
  */
-FileUtils.isImg('123.png'
+FileUtils.isImg('123.png');
 
 /**
  * 是 PDF
  * @param name 
  * @returns 
  */
-FileUtils.isPdf('123.pdf'
+FileUtils.isPdf('123.pdf');
 ```
 
 ## is-utils
@@ -277,5 +297,5 @@ function isExist(obj: any): boolean;
 
 import { IsUtils } from "motl";
 
-IsUtils.isArray([] // true
+IsUtils.isArray([]); // true
 ```
