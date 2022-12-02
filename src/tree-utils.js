@@ -1,8 +1,11 @@
 
 
+const DEFAULT_ID_FIELD = 'id';
+const DEFAULT_PARENT_FIELD = 'parentId';
+const DEFAULT_CHILDREN_FIELD = 'children';
 
 // 设置 children
-const setChildren = (target, list, idField = 'id',parentIdField = 'parentId', childrenField = 'children' ) => {
+const setChildren = (target, list, idField = DEFAULT_ID_FIELD ,parentIdField = DEFAULT_PARENT_FIELD, childrenField = DEFAULT_CHILDREN_FIELD) => {
 
   const children = list.filter(item =>{
     return item[parentIdField] === target[idField];
@@ -24,18 +27,15 @@ const setChildren = (target, list, idField = 'id',parentIdField = 'parentId', ch
  * @param {*} topLevelParentId 根父 id
  * @param {*} options {idField: 唯一标识字段名（默认：'id'）, parentIdField: 父id字段名（默认：'parentId'）, childrenField: 子字段名（默认：'children'）}
  * @returns 树形数组
+ * 
  */
- export const toTree = (list, topLevelParentId = null , options = {
-  idField: 'id',
-  parentIdField: 'parentId',
-  childrenField: 'children'
- }) => {
-  const {idField, parentIdField, childrenField} = options;
+ export const toTree = (list, topLevelParentId = null , options = {}) => {
+  const {idField = DEFAULT_ID_FIELD, parentIdField = DEFAULT_PARENT_FIELD, childrenField = DEFAULT_CHILDREN_FIELD} = options;
 
   // 一级目录
   let tree = list.filter(item => item[parentIdField] === topLevelParentId);
   for(let item of tree){
-    setChildren(item, list, idField || 'id',parentIdField || 'parentId',childrenField || 'children');
+    setChildren(item, list, idField ,parentIdField ,childrenField);
   }
   return tree;
 }
@@ -46,11 +46,13 @@ const setChildren = (target, list, idField = 'id',parentIdField = 'parentId', ch
  * @param {*} options {childrenField: 子字段名（默认：'children'）}
  * @returns 数组
  */
-export const toList = (tree, options = {childrenField: 'children'} ,retArr = []) => {
+export const toList = (tree, options = {} ,retArr = []) => {
+
+  const {childrenField = DEFAULT_CHILDREN_FIELD} = options;
 
   tree.forEach((node) => {
     retArr.push(node);
-    const children = node[options.childrenField];
+    const children = node[childrenField];
     if(!children || !children.length){
       return;
     }
@@ -67,7 +69,7 @@ export const toList = (tree, options = {childrenField: 'children'} ,retArr = [])
  * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
  * @returns 查询到的节点或 null
  */
-export const findNode = (id, tree, options = {idFieldName: 'id', childrenFieldName: 'children'}) => {
+export const findNode = (id, tree, options = {}) => {
   if(!id){
     throw new Error('id 参数错误');
   }
@@ -75,7 +77,7 @@ export const findNode = (id, tree, options = {idFieldName: 'id', childrenFieldNa
     throw new Error('tree 参数错误');
   }
 
-  const { idFieldName = 'id', childrenFieldName = 'children'} = options;
+  const { idFieldName = DEFAULT_ID_FIELD, childrenFieldName = DEFAULT_CHILDREN_FIELD} = options;
 
   let target = null;
   for (let node of tree) {
@@ -98,10 +100,53 @@ export const findNode = (id, tree, options = {idFieldName: 'id', childrenFieldNa
   return target;
 }
 
+/**
+ * 
+ * @param {*} node 节点
+ * @param {*} tree 树
+ * @param {*} options {idField : DEFAULT_ID_FIELD, childrenField: DEFAULT_CHILDREN_FIELD, parentIdField: DEFAULT_PARENT_FIELD}
+ * @returns 祖先节点 id 数组
+ */
+const ancestor = (node, tree , options = {} ,ret = []) => {
+  
+  const {idField = DEFAULT_ID_FIELD, parentIdField = DEFAULT_PARENT_FIELD, childrenField = DEFAULT_CHILDREN_FIELD} = options;
+
+  if(!node || !node[parentIdField]){
+    return ret;
+  }
+
+  ret.push(node[parentIdField]);
+  const parent = findNode(node[parentIdField], tree, {idFieldName: idField, childrenFieldName: childrenField});
+  if(parent){
+    ancestor(parent, tree, options ,ret);
+  }
+  return ret;
+};
+
+export const descendants = (node, options = {}, ret = []) => {
+
+  const {childrenField = DEFAULT_CHILDREN_FIELD} = options;
+
+  // if(!node || !node[childrenField]){
+  //   return ret;
+  // }
+
+  const children = node[childrenField];
+  if(children && children.length){
+    for(let child of children){
+      ret.push(child);
+      descendants(child, ret);
+    }
+  }
+  return ret;
+}
+
 const TreeUtils = {
   toTree,
   toList,
-  findNode
+  findNode,
+  ancestor,
+  descendants
 }
 
 export default TreeUtils;
