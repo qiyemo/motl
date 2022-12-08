@@ -59,6 +59,7 @@ test('TreeUtils.findNode ', () => {
   expect(JSON.stringify(node) === JSON.stringify(target)).toBe(true);
 });
 
+
 test('TreeUtils.ancestor ', () => {
   const tree = [
     {key: '1', name: '1', pid: '0', children: [
@@ -70,16 +71,18 @@ test('TreeUtils.ancestor ', () => {
     {key: '2', name: '2', pid: '0'},
   ];
 
-  const ancestor = JSON.stringify(TreeUtils.ancestor({key: '1-1-1', pid: '1-1'}, tree, {idField: 'key', parentIdField: 'pid'}));
-  const target = JSON.stringify(['1-1', '1', '0']);
-
+  const ancestor = JSON.stringify(TreeUtils.ancestor('1-1-1', tree, {idField: 'key', parentIdField: 'pid'}));
   console.log('ancestor ', ancestor);
+  const ancestorIds = JSON.stringify(JSON.parse(ancestor).map(item => item.key));
+  const target = JSON.stringify(['1-1', '1']);
+
+  console.log('ancestorIds ', ancestorIds);
   console.log('target ', target);
   
-  expect(ancestor === target).toBe(true);
+  expect(ancestorIds === target).toBe(true);
 });
 
-test('TreeUtils.descendants ', () => {
+test('TreeUtils.descendant ', () => {
   const node = 
     {key: '1', name: '1', pid: '0', children: [
       {key: '1-1', name: '1-1', pid: '1', children: [
@@ -87,13 +90,18 @@ test('TreeUtils.descendants ', () => {
       ]},
       {key: '1-2', name: '1-2', pid: '1'},
     ]}
-   
+  const descendant = JSON.stringify(TreeUtils.descendant(node).map(item => item.key));
+  const target = JSON.stringify(['1-1', '1-1-1', '1-2']);  
+  expect(descendant === target).toBe(true);
 
-  const descendants = JSON.stringify(TreeUtils.descendants(node));
-  const target = JSON.stringify(['1-1', '1', '0']);
+  const node1 = {key: '1', name: '1', pid: '0', children1: [
+    {key: '1-1', name: '1-1', pid: '1', children1: [
+      {key: '1-1-1', name: '1-1-1', pid: '1-1'},
+    ]},
+    {key: '1-2', name: '1-2', pid: '1'},
+  ]};
+  const descendants1 = JSON.stringify(TreeUtils.descendant(node1, {childrenField: 'children1'}).map(item => item.key));
+  const target1 = JSON.stringify(['1-1', '1-1-1', '1-2']);  
+  expect(descendants1 === target1).toBe(true);
 
-  console.log('descendants ', descendants);
-  console.log('target ', target);
-  
-  expect(descendants === target).toBe(true);
 });

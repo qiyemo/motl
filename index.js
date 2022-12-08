@@ -7,6 +7,7 @@ import UUIDUtils from './src/uuid-utils';
 import FileUtils from './src/file-utils';
 import TreeUtils from './src/tree-utils';
 import IsUtils from './src/is-utils';
+import PageUtils from './src/page-utils';
 
 export {
   IDCardUtils,
@@ -15,7 +16,8 @@ export {
   UUIDUtils,
   FileUtils,
   TreeUtils,
-  IsUtils
+  IsUtils,
+  PageUtils
 }
 
 const motl = {
@@ -25,6 +27,7 @@ const motl = {
   UUIDUtils,
   FileUtils,
   TreeUtils,
-  IsUtils
+  IsUtils,
+  PageUtils
 }
 export default motl;

@@ -100,42 +100,54 @@ export const findNode = (id, tree, options = {}) => {
   return target;
 }
 
-/**
- * 
- * @param {*} node 节点
- * @param {*} tree 树
- * @param {*} options {idField : DEFAULT_ID_FIELD, childrenField: DEFAULT_CHILDREN_FIELD, parentIdField: DEFAULT_PARENT_FIELD}
- * @returns 祖先节点 id 数组
- */
-const ancestor = (node, tree , options = {} ,ret = []) => {
-  
+const loopAncestor = (node, tree , options = {} ,ret = []) => {
   const {idField = DEFAULT_ID_FIELD, parentIdField = DEFAULT_PARENT_FIELD, childrenField = DEFAULT_CHILDREN_FIELD} = options;
-
-  if(!node || !node[parentIdField]){
-    return ret;
-  }
-
-  ret.push(node[parentIdField]);
   const parent = findNode(node[parentIdField], tree, {idFieldName: idField, childrenFieldName: childrenField});
   if(parent){
-    ancestor(parent, tree, options ,ret);
+    ret.push(parent);
+    loopAncestor(parent, tree, options ,ret);
   }
   return ret;
-};
+}
 
-export const descendants = (node, options = {}, ret = []) => {
+/**
+ * 
+ * @param {*} id 节点 id
+ * @param {*} tree 树
+ * @param {*} options {idField: 唯一标识字段名（默认：'id'）, parentIdField: 父id字段名（默认：'parentId'）, childrenField: 子字段名（默认：'children'）}
+ * @returns 节点数组
+ */
+ const ancestor = (id, tree , options = {}) => {
+  const {idField = DEFAULT_ID_FIELD, childrenField = DEFAULT_CHILDREN_FIELD} = options;
+  const node = findNode(id, tree, {idFieldName: idField, childrenFieldName: childrenField});
+  if(!node){
+    return [];
+  }
+  return loopAncestor(node, tree, options);
+}
+
+/**
+ * 获取树的后代节点数组
+ * 
+ * @param {*} node 树的节点
+ * @param {*} options  {childrenField: children字段名，默认为 'children'} 
+ * @returns 
+ */
+export const descendant = (node, options = {}, ret = []) => {
 
   const {childrenField = DEFAULT_CHILDREN_FIELD} = options;
 
-  // if(!node || !node[childrenField]){
-  //   return ret;
-  // }
+  
+
+  if(!node || !node[childrenField]){
+    return ret;
+  }
 
   const children = node[childrenField];
   if(children && children.length){
     for(let child of children){
       ret.push(child);
-      descendants(child, ret);
+      descendant(child, options ,ret);
     }
   }
   return ret;
@@ -146,7 +158,7 @@ const TreeUtils = {
   toList,
   findNode,
   ancestor,
-  descendants
+  descendant
 }
 
 export default TreeUtils;

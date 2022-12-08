@@ -61,9 +61,13 @@ declare module 'motl' {
      * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
      * @returns 查询到的节点或 null
      */
-    function findNode(id: string, tree: any[], options: {idFieldName: string; childrenFieldName: string;}): any;
-  }
+    function findNode(id: string, tree: any[], options: {idFieldName: string = 'id'; childrenFieldName: string = 'children';}): any;
 
+    function ancestor(id: string, tree: any[], options: {idField: string = 'id'; parentIdField: string = 'parentId';childrenField:string = 'children'}): any[];
+
+    function descendant(node: any, options: {childrenField: string = 'children'}, ret = [])
+    
+  }
   export namespace IsUtils {
     function isArray(obj: any): boolean;
     function isObject(obj: any): boolean;
@@ -77,5 +81,10 @@ declare module 'motl' {
     function isFunction(obj: any): boolean;
     function isEmptyObject(obj: any): boolean;
     function isExist(obj: any): boolean;
+  }
+
+  export namespace PageUtils {
+    function build(size: number = 10): {current: number; size: number; total: number; sizes: number[]};
+    function pageData(page: {current: number; size: number;}, list: T[]): T[];
   }
 }

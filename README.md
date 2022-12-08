@@ -258,6 +258,64 @@ const tree = [
   {id: '2', name: '2', parentId: '0'},
 ];
 const node = TreeUtils.findNode('1-1', tree);
+
+/**
+ * 获取祖先节点数组
+ * 
+ * @param {*} id 节点 id
+ * @param {*} tree 树
+ * @param {*} options {idField: 唯一标识字段名（默认：'id'）, parentIdField: 父id字段名（默认：'parentId'）, childrenField: 子字段名（默认：'children'）}
+ * @returns 节点数组
+ */
+  const tree = [
+    {key: '1', name: '1', pid: '0', children: [
+      {key: '1-1', name: '1-1', pid: '1', children: [
+        {key: '1-1-1', name: '1-1-1', pid: '1-1'},
+      ]},
+      {key: '1-2', name: '1-2', pid: '1'},
+    ]},
+    {key: '2', name: '2', pid: '0'},
+  ];
+
+  const ancestor = JSON.stringify(TreeUtils.ancestor('1-1-1', tree, {idField: 'key', parentIdField: 'pid'}));
+  console.log('ancestor ', ancestor);
+  const ancestorIds = JSON.stringify(JSON.parse(ancestor).map(item => item.key));
+  const target = JSON.stringify(['1-1', '1']);
+
+  console.log('ancestorIds ', ancestorIds);
+  console.log('target ', target);
+  
+  expect(ancestorIds === target).toBe(true);
+
+/**
+ * 获取树的后代节点数组
+ * 
+ * @param {*} node 树的节点
+ * @param {*} options  {childrenField: children字段名，默认为 'children'} 
+ * @returns 
+ */
+const node = 
+  {key: '1', name: '1', pid: '0', children: [
+    {key: '1-1', name: '1-1', pid: '1', children: [
+      {key: '1-1-1', name: '1-1-1', pid: '1-1'},
+    ]},
+    {key: '1-2', name: '1-2', pid: '1'},
+  ]}
+const descendant = JSON.stringify(TreeUtils.descendant(node).map(item => item.key));
+const target = JSON.stringify(['1-1', '1-1-1', '1-2']);  
+expect(descendant === target).toBe(true);
+
+const node1 = {key: '1', name: '1', pid: '0', children1: [
+  {key: '1-1', name: '1-1', pid: '1', children1: [
+    {key: '1-1-1', name: '1-1-1', pid: '1-1'},
+  ]},
+  {key: '1-2', name: '1-2', pid: '1'},
+]};
+const descendants1 = JSON.stringify(TreeUtils.descendant(node1, {childrenField: 'children1'}).map(item => item.key));
+const target1 = JSON.stringify(['1-1', '1-1-1', '1-2']);  
+expect(descendants1 === target1).toBe(true);
+
+
 ```
 ## file-utils
 ```js
@@ -298,4 +356,46 @@ function isExist(obj: any): boolean;
 import { IsUtils } from "motl";
 
 IsUtils.isArray([]); // true
+```
+## page-utils
+```js
+import { IsUtils } from "motl";
+
+const list = [
+  1,2,3,4,5,6,7,8,9,10,
+  12,12,13,14,15,16,17,18,19,20,
+  21,22,23,24,25,26,27,28,29,30,
+  31,32,33,34,35,36,37,38,39,40,
+  41,42,43,44,45,46,47,48,49,50,
+];
+
+const data1 = [1,2,3,4,5,6,7,8,9,10];
+const data2 = [12,12,13,14,15,16,17,18,19,20];
+const data3 = [21,22,23,24,25,26,27,28,29,30];
+const data4 = [31,32,33,34,35,36,37,38,39,40];
+const data5 = [41,42,43,44,45,46,47,48,49,50];
+
+/**
+ * 创建一个 page 对象
+ * @param {*} size 每页行数，默认为 10
+ * @returns 新 page 对象
+ */
+const page =  PageUtils.build(10);
+
+/**
+ * 将数组进行分页
+ * @param {*} page 对象
+ * @param {*} list 源数据
+ * @returns 分页后得数组
+ */
+page.current = 1;
+expect(JSON.stringify(PageUtils.pageData(page,list)) === JSON.stringify(data1)).toBe(true);
+page.current = 2;
+expect(JSON.stringify(PageUtils.pageData(page,list)) === JSON.stringify(data2)).toBe(true);
+page.current = 3;
+expect(JSON.stringify(PageUtils.pageData(page,list)) === JSON.stringify(data3)).toBe(true);
+page.current = 4;
+expect(JSON.stringify(PageUtils.pageData(page,list)) === JSON.stringify(data4)).toBe(true);
+page.current = 5;
+expect(JSON.stringify(PageUtils.pageData(page,list)) === JSON.stringify(data5)).toBe(true);
 ```
