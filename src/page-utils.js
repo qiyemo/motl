@@ -44,10 +44,13 @@ export const build = (size = 10) => {
  * 将数组进行分页
  * @param {*} page 对象
  * @param {*} list 源数据
+ * @param {*} options: {withIndex: boolean; indexField: string;}
  * @returns 分页后得数组
  */
-export const pageData = (page, list) => {
+export const pageData = (page, list, options = {}) => {
   const {current, size} = page;
+
+  const {withIndex = false, indexField = 'index'} = options;
 
   if(!current || !size){
     return [];
@@ -56,6 +59,16 @@ export const pageData = (page, list) => {
   const start = (current -1) * size;
   const end = start + size;
   const ret = list.slice(start, end);
+
+  if(withIndex){
+    let indexs = [];
+    for(let index = start + 1; index < end + 1; index++ ){
+      indexs.push(index);
+    }
+    ret.forEach((item, index) => {
+      item[indexField] = indexs[index];
+    });
+  }
   return ret;
 }
 
