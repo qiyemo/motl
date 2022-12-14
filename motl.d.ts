@@ -34,10 +34,10 @@ declare module 'motl' {
   }
 
   export namespace DateUtils {
-    function format(date: Date | string, opt: string): string;
+    function format(date: Date | string, opt?: string): string;
     function cnWeek(date: Date | string): string;
     function realMonth(date: Date | string): number;
-    function  withRealMonth(date: Date | string, realMonth: number): Date;
+    function  withRealMonth(date: Date | string, realMonth?: number): Date;
   }
 
   export namespace UUIDUtils {
@@ -61,11 +61,11 @@ declare module 'motl' {
      * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
      * @returns 查询到的节点或 null
      */
-    function findNode(id: string, tree: any[], options: {idFieldName: string = 'id'; childrenFieldName: string = 'children';}): any;
+    function findNode(id: string, tree: any[], options: {idFieldName?: string; childrenFieldName?:string;} | undefined): any;
 
-    function ancestor(id: string, tree: any[], options: {idField: string = 'id'; parentIdField: string = 'parentId';childrenField:string = 'children'}): any[];
+    function ancestor(id: string, tree: any[], options: {idField?: string; parentIdField?: string;childrenField?:string} | undefined): any[];
 
-    function descendant(node: any, options: {childrenField: string = 'children'}, ret = [])
+    function descendant(node: any, options: {childrenField?: string} | undefined)
     
   }
   export namespace IsUtils {
@@ -84,7 +84,7 @@ declare module 'motl' {
   }
 
   export namespace PageUtils {
-    function build(size: number = 10): {current: number; size: number; total: number; sizes: number[]};
-    function pageData(page: {current: number; size: number;}, list: T[]): T[];
+    function build(size: number): {current: number; size: number; total: number; sizes: number[]};
+    function pageData(page: {current: number; size: number;}, list: any[], options: {withIndex?: boolean; indexField?: string;} | undefined): any[];
   }
 }
