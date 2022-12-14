@@ -74,7 +74,8 @@ export const pageData = (page, list, options = {}) => {
 
 const PageUtils = {
   build,
-  pageData
+  pageData,
+  Page
 }
 
 export default PageUtils;
