@@ -1,5 +1,5 @@
 
-class Page {
+export class Page {
   sizes = [];
   total = 0;
   size = 10;

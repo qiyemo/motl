@@ -84,7 +84,10 @@ declare module 'motl' {
   }
 
   export namespace PageUtils {
-    function build(size: number): {current: number; size: number; total: number; sizes: number[]};
+     class Page {
+      constructor(size: number | undefined);
+     }
+    function build(size: number | undefined): {current: number; size: number; total: number; sizes: number[]};
     function pageData(page: {current: number; size: number;}, list: any[], options: {withIndex?: boolean; indexField?: string;} | undefined): any[];
   }
 }
