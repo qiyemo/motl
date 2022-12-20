@@ -85,9 +85,34 @@ declare module 'motl' {
 
   export namespace PageUtils {
      class Page {
-      constructor(size: number | undefined);
+      // 分页条数可选项
+      sizes: number[];
+      // 总条数
+      total: number;
+      // 每页条数
+      size: number;
+      // 当前页数
+      current: number;
+
+      // 获取当前页数
+      get page(): number;
+      //  设置当前页数
+      set page(page: number);
+
+      // 获取每页条数
+      get rows(): number;
+      // 设置每页条数
+      set rows(size: number);
+
+      constructor(size?: number);
+
+      // d当前页数改变
+      currentChange(handle: Function);
+      // 每页条数改变
+      sizeChange(handle: Function);
      }
-    function build(size: number | undefined): {current: number; size: number; total: number; sizes: number[]};
-    function pageData(page: {current: number; size: number;}, list: any[], options: {withIndex?: boolean; indexField?: string;} | undefined): any[];
+
+    function build(size?: number): {current: number; size: number; total: number; sizes: number[]};
+    function pageData(page: {current: number; size: number;}, list: any[], options?: {withIndex?: boolean; indexField?: string;} | undefined): any[];
   }
 }
