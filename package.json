@@ -1,6 +1,6 @@
 {
   "name": "motl",
-  "version": "1.0.33",
+  "version": "1.0.34",
   "description": "js 工具库",
   "main": "dist/motl.es.js",
   "type": "module",

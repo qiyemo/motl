@@ -51,7 +51,7 @@ declare module 'motl' {
   }
 
   export namespace TreeUtils {
-    function toTree(list: any[], topLevelParentId: any): any[];
+    function toTree(list: any[], topLevelParentId: any, options?: {idField?: string; parentIdField?: string;childrenField?:string}): any[];
     function toList(tree: any[]): any[];
 
     /**
