@@ -61,11 +61,11 @@ declare module 'motl' {
      * @param {*} options 选项 {idFieldName: 唯一标识字段名，默认为 'id', childrenFieldName: children字段名，默认为 'children'} 
      * @returns 查询到的节点或 null
      */
-    function findNode(id: string, tree: any[], options: {idFieldName?: string; childrenFieldName?:string;} | undefined): any;
+    function findNode(id: string, tree: any[], options?: {idFieldName?: string; childrenFieldName?:string;}): any;
 
-    function ancestor(id: string, tree: any[], options: {idField?: string; parentIdField?: string;childrenField?:string} | undefined): any[];
+    function ancestor(id: string, tree: any[], options?: {idField?: string; parentIdField?: string;childrenField?:string}): any[];
 
-    function descendant(node: any, options: {childrenField?: string} | undefined)
+    function descendant(node: any, options?: {childrenField?: string})
     
   }
   export namespace IsUtils {
@@ -115,4 +115,9 @@ declare module 'motl' {
     function build(size?: number): {current: number; size: number; total: number; sizes: number[]};
     function pageData(page: {current: number; size: number;}, list: any[], options?: {withIndex?: boolean; indexField?: string;} | undefined): any[];
   }
+}
+
+export namespace  DomUtils {
+  function setWatermark(str: string):void;
+  function outWatermark():void;
 }

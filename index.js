@@ -8,6 +8,7 @@ import FileUtils from './src/file-utils';
 import TreeUtils from './src/tree-utils';
 import IsUtils from './src/is-utils';
 import PageUtils from './src/page-utils';
+import DomUtils from './src/dom-utils';
 
 export {
   IDCardUtils,
@@ -17,7 +18,8 @@ export {
   FileUtils,
   TreeUtils,
   IsUtils,
-  PageUtils
+  PageUtils,
+  DomUtils
 }
 
 const motl = {
@@ -28,6 +30,7 @@ const motl = {
   FileUtils,
   TreeUtils,
   IsUtils,
-  PageUtils
+  PageUtils,
+  DomUtils
 }
 export default motl;

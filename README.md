@@ -420,3 +420,9 @@ const list1 = [
   page1.current = 3;
   expect(JSON.stringify(PageUtils.pageData(page1,list1, {withIndex: true, indexField: 'index'})) === JSON.stringify(data2_3)).toBe(true);
 ```
+## dom-utils
+```ts
+import {DomUtils} from 'motl';
+DomUtils.setWatermark('万叶(17629081708)');
+DomUtils.outWatermark();
+```

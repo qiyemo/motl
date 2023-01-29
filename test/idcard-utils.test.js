@@ -18,7 +18,7 @@ test("IDCardUtils.getMonth('610481199312303815')", () => {
 });
 
 test("IDCardUtils.getAge('610481199312303815')", () => {
-  expect(IDCardUtils.getAge('610481199312303815')).toBe(28);
+  expect(IDCardUtils.getAge('610481199312303815')).toBe(29);
 });
 
 test("IDCardUtils.getSexNum('610481199312303815')", () => {
@@ -34,7 +34,7 @@ test("IDCardUtils.getInfo('610481199312303815')", () => {
   expect(IDCardUtils.getInfo('610481199312303815').year).toBe(1993);
   expect(IDCardUtils.getInfo('610481199312303815').month).toBe(12);
   expect(IDCardUtils.getInfo('610481199312303815').date).toBe(30);
-  expect(IDCardUtils.getInfo('610481199312303815').age).toBe(28);
+  expect(IDCardUtils.getInfo('610481199312303815').age).toBe(29);
   expect(IDCardUtils.getInfo('610481199312303815').sex).toBe('男');
   expect(IDCardUtils.getInfo('610481199312303815').sexNum).toBe(1);
 
