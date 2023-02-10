@@ -121,3 +121,11 @@ export namespace  DomUtils {
   function setWatermark(str: string):void;
   function outWatermark():void;
 }
+export namespace WatermarkUtils {
+  async function imgWatermark(file: File, text: string): Promise<File>;
+}
+
+export namespace WebUtils {
+  function speakText(text: string):void;
+  function playAudio(src: string, audio?: Audio): Audio;
+}

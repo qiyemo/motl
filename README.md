@@ -426,3 +426,20 @@ import {DomUtils} from 'motl';
 DomUtils.setWatermark('万叶(17629081708)');
 DomUtils.outWatermark();
 ```
+
+## web-utils
+```js
+import {WebUtils} from 'motl';
+WebUtils.speakText('你好');
+const audio = WebUtils.playAudio('https://www.123.com/a.mp3');
+WebUtils.playAudio('https://www.123.com/b.mp3',audio);
+```
+## watermark-utils 
+```js
+import {WatermarkUtils} from 'motl';
+const addWatermark = async (file: File) => {
+  const text = `水印`;
+  return await imgWatermark(file, text);
+}
+
+```

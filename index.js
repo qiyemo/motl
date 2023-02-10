@@ -9,6 +9,8 @@ import TreeUtils from './src/tree-utils';
 import IsUtils from './src/is-utils';
 import PageUtils from './src/page-utils';
 import DomUtils from './src/dom-utils';
+import WebUtils from './src/web-utils';
+import WatermarkUtils from './src/watermark-utils';
 
 export {
   IDCardUtils,
@@ -19,7 +21,9 @@ export {
   TreeUtils,
   IsUtils,
   PageUtils,
-  DomUtils
+  DomUtils,
+  WebUtils,
+  WatermarkUtils
 }
 
 const motl = {
@@ -31,6 +35,8 @@ const motl = {
   TreeUtils,
   IsUtils,
   PageUtils,
-  DomUtils
+  DomUtils,
+  WebUtils,
+  WatermarkUtils
 }
 export default motl;
