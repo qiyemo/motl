@@ -126,7 +126,7 @@ const imgToCanvas = (img) => {
   const img = await blobToImg(file);
   const canvas = imgToCanvas(img);
   const blob = await watermark(canvas, text);
-  return blob;
+  return new File([blob], file.name);
  }
  /** 图片加水印 end */
 
