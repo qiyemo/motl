@@ -27,9 +27,30 @@ export const playAudio = (src, audio = new Audio()) => {
   return audio;
 }
 
+/**
+ * 在浏览器中，根据文件 url 下载文件
+ * 
+ * @param {*} url 
+ * @returns 
+ */
+export const download = (url) => {
+  if (!url) {
+    return '';
+  }
+
+  const startIndex = url.lastIndexOf('/') + 1;
+  const a = document.createElement('a');
+  a.download = url.substring(startIndex);
+  a.href = url;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
 const WebUtils = {
   speakText,
-  playAudio
+  playAudio,
+  download
 }
 
 export default WebUtils;
