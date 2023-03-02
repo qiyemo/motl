@@ -128,4 +128,5 @@ export namespace WatermarkUtils {
 export namespace WebUtils {
   function speakText(text: string):void;
   function playAudio(src: string, audio?: Audio): Audio;
+  function download(url: string): void;
 }

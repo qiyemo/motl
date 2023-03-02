@@ -430,9 +430,16 @@ DomUtils.outWatermark();
 ## web-utils
 ```js
 import {WebUtils} from 'motl';
+// 读文本
 WebUtils.speakText('你好');
+
+// 播放声音
 const audio = WebUtils.playAudio('https://www.123.com/a.mp3');
 WebUtils.playAudio('https://www.123.com/b.mp3',audio);
+
+// 在浏览器中，根据文件 url 下载文件
+WebUtils.download('https://jczl.11ms.cn/yh-jczl/file/检查统计表_1677746211725.xls');
+
 ```
 ## watermark-utils 
 ```js
