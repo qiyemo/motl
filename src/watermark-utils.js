@@ -101,7 +101,7 @@ const imgToCanvas = (img) => {
   return canvas
  }
 
- const watermark =  (canvas, text) => {
+ const watermark =  (canvas, text, type = 'image/jpeg') => {
   return new Promise((resolve, reject) => {
    let ctx = canvas.getContext('2d')
    // 设置填充字号和字体，样式
@@ -118,15 +118,16 @@ const imgToCanvas = (img) => {
   for(let i = 0; i < lines.length; i++){
     ctx.fillText(lines[i], canvas.width - 8, canvas.height - 8 - (i*lineHeight));
   }
-   canvas.toBlob((blob) => resolve(blob))
+   canvas.toBlob((blob) => resolve(blob), type)
   })
  } 
 
  export const imgWatermark = async (file, text) => {
+
   const img = await blobToImg(file);
   const canvas = imgToCanvas(img);
-  const blob = await watermark(canvas, text);
-  return new File([blob], file.name);
+  const blob = await watermark(canvas, text, file.type);
+  return new File([blob], file.name, {type: file.type});
  }
  /** 图片加水印 end */
 
