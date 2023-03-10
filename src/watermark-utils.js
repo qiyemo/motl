@@ -87,7 +87,7 @@ const blobToImg = (blob) => {
       img.addEventListener('load', () => resolve(img));
     });
 
-    console.log('blobToImg ', blob);
+    
     reader.readAsDataURL(blob);
   });
 }
@@ -101,26 +101,39 @@ const imgToCanvas = (img) => {
   return canvas
  }
 
- const watermark =  (canvas, text, type = 'image/jpeg') => {
+ const watermark = (canvas, text, type = 'image/jpeg') => {
   return new Promise((resolve, reject) => {
-   let ctx = canvas.getContext('2d')
-   // 设置填充字号和字体，样式
-   ctx.font = "12px 宋体"
-   ctx.fillStyle = "#FFC82C"
-   // 设置右对齐
-   ctx.textAlign = 'right'
-   // 在指定位置绘制文字，这里指定距离右下角20坐标的地方
-   console.log('text', text);
-   const lines = text.split('\n'); // 倒序行
-   lines.reverse();
-   console.log('lines ', lines);
-   const lineHeight = 15;
-  for(let i = 0; i < lines.length; i++){
-    ctx.fillText(lines[i], canvas.width - 8, canvas.height - 8 - (i*lineHeight));
-  }
-   canvas.toBlob((blob) => resolve(blob), type)
-  })
- } 
+    let ctx = canvas.getContext('2d');
+
+    const baseFontSize = 12;
+    const coefficient = canvas.height / 1080;
+    let fontSize = baseFontSize * coefficient;
+    if (fontSize < 12) {
+      fontSize = 12;
+    }
+
+    // 设置填充字号和字体，样式
+    ctx.font = `${fontSize}px 宋体`;
+    ctx.fillStyle = '#FFC82C';
+    // 设置右对齐
+    ctx.textAlign = 'right';
+    // 在指定位置绘制文字，这里指定距离右下角20坐标的地方
+
+    const lines = text.split('\n'); // 倒序行
+    lines.reverse();
+
+    const lineHeight = 1.5 * fontSize;
+
+    for (let i = 0; i < lines.length; i++) {
+      ctx.fillText(
+        lines[i],
+        canvas.width - fontSize,
+        canvas.height - fontSize - i * lineHeight
+      );
+    }
+    canvas.toBlob((blob) => resolve(blob), type);
+  });
+}; 
 
  export const imgWatermark = async (file, text) => {
 
