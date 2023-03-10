@@ -101,8 +101,57 @@ const imgToCanvas = (img) => {
   return canvas
  }
 
- const watermark = (canvas, text, type = 'image/jpeg') => {
+
+
+/**
+ *
+ * @param {*} canvas
+ * @param {*} height 右下角水印高度
+ * @returns
+ */
+const calcFontColor = (canvas, height = 0, width = 0) => {
+ 
+  const ctx = canvas.getContext('2d');
+  const xOffset = canvas.width - width;
+  const yOffset = canvas.height - height;
+  const imageData = ctx.getImageData(xOffset, yOffset, width, height);
+  const data = imageData.data;
+  // Calculate the dominant color of the image
+  let rSum = 0;
+  let gSum = 0;
+  let bSum = 0;
+  let count = 0;
+  for (let i = 0; i < data.length; i += 4) {
+    // Skip transparent pixels
+    if (data[i + 3] === 0) continue;
+
+    // Sum up the RGB values
+    rSum += data[i];
+    gSum += data[i + 1];
+    bSum += data[i + 2];
+
+    // Increment the pixel count
+    count++;
+  }
+  // Calculate the average RGB values
+  const rAvg = Math.round(rSum / count);
+  const gAvg = Math.round(gSum / count);
+  const bAvg = Math.round(bSum / count);
+  // Calculate the grayscale value of the dominant color
+  const gray = Math.round(0.299 * rAvg + 0.587 * gAvg + 0.114 * bAvg);
+  // Set the watermark color according to the grayscale value
+  let watermarkColor;
+  if (gray > 192) {
+    watermarkColor = 'black';
+  } else {
+    watermarkColor = 'white';
+  }
+  return watermarkColor;
+};
+
+const watermark = (canvas, text, type = 'image/jpeg') => {
   return new Promise((resolve, reject) => {
+   
     let ctx = canvas.getContext('2d');
 
     const baseFontSize = 12;
@@ -114,7 +163,7 @@ const imgToCanvas = (img) => {
 
     // 设置填充字号和字体，样式
     ctx.font = `${fontSize}px 宋体`;
-    ctx.fillStyle = '#FFC82C';
+
     // 设置右对齐
     ctx.textAlign = 'right';
     // 在指定位置绘制文字，这里指定距离右下角20坐标的地方
@@ -123,25 +172,35 @@ const imgToCanvas = (img) => {
     lines.reverse();
 
     const lineHeight = 1.5 * fontSize;
-
+    const bottom = fontSize;
+    const right = fontSize;
+    const height = bottom + (lines.length - 1) * lineHeight;
+    let maxLine = lines[0];
+    for (const line of lines) {
+      if (line.length > maxLine.length) {
+        maxLine = line;
+      }
+    }
+    const width = maxLine.length * fontSize;
+    // ctx.fillStyle = '#FFC82C';
+    ctx.fillStyle = calcFontColor(canvas, height, width);
     for (let i = 0; i < lines.length; i++) {
       ctx.fillText(
         lines[i],
-        canvas.width - fontSize,
-        canvas.height - fontSize - i * lineHeight
+        canvas.width - right,
+        canvas.height - bottom - i * lineHeight
       );
     }
     canvas.toBlob((blob) => resolve(blob), type);
   });
-}; 
+};
 
- export const imgWatermark = async (file, text) => {
-
+export const imgWatermark = async (file, text) => {
   const img = await blobToImg(file);
   const canvas = imgToCanvas(img);
   const blob = await watermark(canvas, text, file.type);
-  return new File([blob], file.name, {type: file.type});
- }
+  return new File([blob], file.name, { type: file.type });
+};
  /** 图片加水印 end */
 
  const WatermarkUtils = {
