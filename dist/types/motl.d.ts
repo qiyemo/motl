@@ -52,7 +52,7 @@ declare module 'motl' {
 
   export namespace TreeUtils {
     function toTree(list: any[], topLevelParentId: any, options?: {idField?: string; parentIdField?: string;childrenField?:string}): any[];
-    function toList(tree: any[]): any[];
+    function toList(tree: any[], options?: {childrenField?: string = 'children'}): any[];
 
     /**
      * 根据唯一标识获取树上的节点
@@ -122,7 +122,10 @@ export namespace  DomUtils {
   function outWatermark():void;
 }
 export namespace WatermarkUtils {
-  async function imgWatermark(file: File, text: string): Promise<File>;
+  // baseSize: 16,
+  // minSize: 14,
+  // position: 'bottom-left',
+  async function imgWatermark(file: File, text: string, options?: {baseSize?: number = 14; minSize?: number = 14; position?: 'bottom-left' | 'bottom-right' = "bottom-right"}): Promise<File>;
 }
 
 export namespace WebUtils {
