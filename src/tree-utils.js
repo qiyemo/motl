@@ -70,18 +70,21 @@ export const toList = (tree, options = {} ,retArr = []) => {
  * @returns 查询到的节点或 null
  */
 export const findNode = (id, tree, options = {}) => {
-  if(!id){
+ 
+
+  if (!id) {
     throw new Error('id 参数错误');
   }
-  if(!tree || !tree.length){
+  if (!tree || !tree.length) {
     throw new Error('tree 参数错误');
   }
 
-  const { idFieldName = DEFAULT_ID_FIELD, childrenFieldName = DEFAULT_CHILDREN_FIELD} = options;
+  const { idFieldName = 'id', childrenFieldName = 'children' } = options;
+
+
 
   let target = null;
   for (let node of tree) {
-   
     if (node[idFieldName] === id) {
       target = node;
     }
@@ -90,7 +93,7 @@ export const findNode = (id, tree, options = {}) => {
     return target;
   }
   for (let node of tree) {
-    if (node.children  && node.children.length) {
+    if (node[childrenFieldName] && node[childrenFieldName].length) {
       target = findNode(id, node[childrenFieldName], options);
       if (target) {
         return target;
@@ -98,7 +101,8 @@ export const findNode = (id, tree, options = {}) => {
     }
   }
   return target;
-}
+};
+
 
 const loopAncestor = (node, tree , options = {} ,ret = []) => {
   const {idField = DEFAULT_ID_FIELD, parentIdField = DEFAULT_PARENT_FIELD, childrenField = DEFAULT_CHILDREN_FIELD} = options;
